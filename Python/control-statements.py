@@ -49,8 +49,8 @@
 #     print(x)
 
 #pyramid using for loop
-x=5
-for i in range(0,x):
-    for j in range(0,i+1):
-        print("*", end= '') #end='' means that it is a whitespace and dot go to next line
-    print("\r")
+# x=5
+# for i in range(0,x):
+#     for j in range(0,i+1):
+#         print("*", end= '') #end='' means that it is a whitespace and dot go to next line
+#     print("\r")
