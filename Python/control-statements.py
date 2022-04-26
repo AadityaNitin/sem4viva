@@ -48,9 +48,31 @@
 # for x in range(3,30,3):
 #     print(x)
 
-#pyramid using for loop
+#right angled triangle using for loop
+# *
+# **
+# ***
+# ****
+# ******
 # x=5
 # for i in range(0,x):
 #     for j in range(0,i+1):
 #         print("*", end= '') #end='' means that it is a whitespace and dot go to next line
 #     print("\r")
+
+#shorter way to make the same right angled triangle
+# for i in range(0,x):
+#     print("*" * (i+1))
+
+
+#pyramid using for loop
+#      *
+#     * *
+#    * * *
+#   * * * *
+#  * * * * *  
+# x=5
+# for i in range(0,x):
+#     print(" " * (x-i+1), end="")
+#     print("*" * (2*i+1), end="")
+#     print(" " * (x-i+1))
