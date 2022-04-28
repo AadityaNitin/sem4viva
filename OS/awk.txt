@@ -1,0 +1,19 @@
+Awk is a scripting language used for manipulating data and generating reports. The awk command programming language requires no compiling and allows the user to use variables, numeric functions, string functions, and logical operators. 
+
+Display all records of file with m marks:
+awk '/m/' name.txt
+
+Display details of employees name and salary:
+awk '{print $2 "\t" $3 }' name.txt
+
+Display details of students with marks (greater/less) than x and (less/greater) y:
+awk '$column no<x && $column no>y' name.txt
+
+Display details of employees till id no x:
+awk 'NR=>1 && NR<=x' name.txt
+
+Display  first p columns:
+awk '{for(i=1;i<=p;i++) printf $i" "; print ""}' 
+
+Display even columns:
+awk '{ for (i=1;i<=NF;i+=2) print $i }' name.txt
