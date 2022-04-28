@@ -1,0 +1,10 @@
+1       Aaditya     150000      5       Director      
+2       Roshni      150000      5       Director
+3       Harsh       100000      4       Manager
+4       Ram         100000      4       Manager
+5       Jason       70000       3       Engineer
+6       Yash        70000       3       Engineer       
+7       Alex        70000       3       Engineer
+8       Om          60000       2       Engineer
+9       Darshan     60000       2       Engineer
+10      Jash        60000       2       Engineer
