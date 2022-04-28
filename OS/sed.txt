@@ -1,0 +1,53 @@
+SED commands cheatsheet:
+Sed stands for stream editor
+It can perform many functions on files like searching, find and replace, insertion, deletion
+sed command to:
+
+Display all records of file
+sed 'a,b!d' name.txt a = 1; b = number of last line
+sed -n 'a,bp' name.txt a = 1; b = number of last line
+
+Display line no N:
+sed 'N!d' name.txt
+OR
+sed -n 'N'p name.txt
+
+Display last line:
+sed -n ‘$’p name 
+
+Display even lines:
+sed -n 'n;p' name.txt
+
+Display odd lines:
+sed -n 'p;n' name.txt
+
+Display line no 4 to last:
+sed -n '4,$'p name.txt
+
+Display line no N to M:
+sed -n 'N,M'p name.txt
+
+Display all lines except 2,3,6,7,8:
+sed -n -e '1'p -e '4,5'p -e '9,10'p name.txt
+
+Display top 7 lines:
+sed -n '1,7'p name.txt
+
+Display all lines except last line:
+sed '$d' name.txt
+
+Display all occurances of Manager:
+sed -n /Manager/p name.txt
+
+Display details of "Pooja":
+sed -n /Pooja/p name.txt
+
+Substitute all the occurrences of “Manger” to “Leader”:
+sed -n 's/Manager/Leader/' name.txt
+
+
+Delete 2nd row from file:
+sed '2d' name.txt
+
+Delete range of rows from file:
+sed 'x,yd' name.txt
