@@ -1,0 +1,19 @@
+The grep filter searches a file for a particular pattern of characters, and displays all lines that contain that pattern. The pattern that is searched in the file is referred to as the regular expression (grep stands for global search for regular expression and print out)
+
+Display all records with "m" marks/salary:
+grep 'm' name.txt
+
+Display all records with details of employees with salary x or y/details of student with name x or y:
+egrep 'x|y' name.txt
+
+Display p lines before the word Manager:
+grep -B p "Manager" name.txt
+
+Display p lines after the word Manager:
+grep -A p "Manager" name.txt
+
+Display p lines before and after the word Manager:
+grep -p -i "Manager" name.txt
+
+Display all records of  details of employees with salary NOT x:
+grep -v "x" name.txt
