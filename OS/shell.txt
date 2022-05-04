@@ -1,0 +1,226 @@
+Simple interest
+#!/bin/bash
+echo "Enter Principal amount(rs):"
+read p
+echo "Enter no of years:"
+read n
+echo "Enter rate of interest:"
+read r
+si=$((($p*$n*$r)/100))
+echo "Simple interest is:$si(rs)"
+t=$(($p+$si))
+echo "Total amount is:$t(rs)"
+
+
+Compound interest:
+#!/bin/bash
+echo "Enter Principal amount(rs):"
+read p
+echo "Enter rate of interest:"
+read r
+echo "Enter compound:"
+read n
+echo "Enter time period elapsed (years)"
+read t
+a=$((p*(1+r/n)**(n*t)))
+echo "Compound interest is:$a(rs)"
+
+
+Equation:
+echo "Enter the value of x:"
+read x
+y=$(((x*x*x)+(3*x*x)-(5*x)+8))
+echo "y=$y"
+
+
+Factors:
+#!/bin/bash
+echo "Enter a number:"
+read x
+for (( i=1; i <= $x; i++ ))
+    do
+        y=$(($x % $i))
+        if [ $y == 0 ]
+        then
+            echo "$i"
+        fi    
+done
+
+
+Multiples:
+#!/bin/bash
+echo "Enter a number:"
+read x
+echo "Enter how many multiples you want:"
+read y
+for (( i=1; i <= $y; i++ ))
+    do
+        m=$(($x*$i))
+        echo "$m"
+done
+
+
+Fibonacci:
+#!/bin/bash
+echo "Enter number of terms:"
+read num 
+t1=0
+t2=1
+sum=0
+echo "t1"
+echo "t2"
+for (( i=3; i <= $num; i++ ))
+    do
+        sum=$(($t1+$t2))
+        t1=$t2
+        t2=$sum
+        echo "$sum"
+done
+
+
+Factorial:
+#!/bin/bash
+echo "Enter a number:"
+read num
+fact=1
+for (( i=1; i <= $num; i++ ))
+    do
+        fact=$(($fact*$i))
+done
+echo "Factorial of $num is $fact"
+
+
+Total and percentage:
+echo "Enter marks of 6 subjects:"
+y=0
+for (( i=0; i <= 5; i++ ))
+    do
+        read marks[i]
+        y=$(($y+${marks[i]}))
+done
+echo "Total marks are $y"
+percent=$(($y/3))
+echo "Total percentage is $percent"
+
+
+Array:
+#!/bin/bash
+echo "In given order:"
+names=(hello Hi Bye Bye!)
+echo ${names[*]}
+echo "In reverse order:"
+for (( i=${#names[@]}; i >= 0; i-- ))
+    do
+        echo "${names[i]}"
+done
+
+
+Day of week:
+#!/bin/bash
+dow=(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
+echo "Enter the number of the day:"
+read d
+if [ $d -ge 8 ]
+then 
+    echo "Invalid input"
+else
+    echo "${dow[$d-1]}"
+fi
+
+
+Power and multiplication table:
+#!/bin/bash
+echo "Enter a number:"
+read n
+echo "Multiplication table of $n :"
+for (( i=1; i <= 10; i++ ))
+    do
+        x=$(($n*$i))
+        echo "$x"
+done
+echo "Power table of $n :"
+for (( j=1; j <= 10; j++ ))
+    do
+        y=$(($n*$j))
+        echo "$y"
+done
+
+
+Even odd between 100:
+#!/bin/bash
+for (( i=0; i <= 100; i=$i+2 ))
+    do
+        echo "$i"
+done
+for (( i=1; i <= 100; i=$i+2 ))
+    do
+        echo "$i"
+done
+
+
+Prime less than 100:
+#!/bin/bash
+echo "Enter a limit"
+read limit
+echo "prime numbers upto $limit are :"
+echo "1"
+i=2
+while [ $i -le $limit ]
+do
+    flag=1
+    j=2    
+    while [ $j -lt $i ]
+    do
+         rem=$(( $i % $j ))
+        if [ $rem -eq 0 ]
+        then
+          flag=0
+          break
+        fi
+    j=$(( $j+1 ))
+    done
+    if [ $flag -eq 1 ]
+    then
+       echo "$i"
+    fi
+i=$(( $i+1 ))
+done
+
+
+Simple calci:
+#!/bin/bash
+echo "simple calculator"
+sum=0
+i="y"
+echo "enter first number"
+read n1
+echo "enter second number"
+read n2
+while [ $i = "y" ]
+do
+echo "1.Addition"
+echo "2.Subtraction"
+echo "3.Multiplication"
+echo "4.Division"
+echo "Enter choice"
+read ch
+case $ch in
+1)sum=$(echo " $n1 + $n2" | bc -l)
+echo "Addition is =" $sum;;
+2)sum=$(echo "$n1 - $n2" | bc -l)
+echo "Sub is =" $sum;;
+3)sum=$(echo "$n1 * $n2" | bc -l)
+echo "Mul is =" $sum;;
+4)sum=$(echo "$n1 / $n2" | bc -l)
+echo "div is =" $sum;;
+*)echo "invalid choice"
+esac
+echo "Press y to continue"
+read i
+if [ $i != "y" ]
+then
+exit
+fi
+done
+
+
