@@ -17,3 +17,28 @@ grep -p -i "Manager" name.txt
 
 Display all records of  details of employees with salary NOT x:
 grep -v "x" name.txt
+
+
+echo "1.Display all the records of files containing 92 marks."
+grep 92 employee.txt
+
+echo "Count no.of lines containing pattern 92"
+grep -c 92 employee.txt
+
+echo "Display records that contain a pattern beginning s and ending with s"
+grep -i -w s.*s employee.txt
+
+echo "Display record of students having Pandita"
+grep -i 'Pandita' employee.txt
+
+echo "Display records of students with marks 89 or 92"
+grep -e '89' -e'92' employee.txt
+
+echo "Display 1 record after and before word pandita"
+grep -i -1 'pandita' employee.txt
+
+echo "Display line no and line with record with 'pandita'"
+grep -i -n 'pandita' employee.txt
+
+echo "Display details of students with marks not 92"
+grep -v '92' employee.txt
