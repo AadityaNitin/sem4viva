@@ -51,3 +51,48 @@ sed '2d' name.txt
 
 Delete range of rows from file:
 sed 'x,yd' name.txt
+
+
+
+
+echo Display all records of file
+sed -n '1,$p' employee.txt
+
+echo line number 3
+sed -n '3p' employee.txt
+
+echo last record
+sed -n '$p' employee.txt
+
+echo line 4 to last
+sed -n -e '4,$p' employee.txt
+
+echo line 3 to 8
+sed -n -e '3,8p' employee.txt
+
+echo top 7 lines
+sed '7q' employee.txt
+
+echo all lines except 2,3,6,7 and 8
+sed -n -e '1p' -e '4,5p' -e '9,$p' employee.txt
+
+echo all lines except last
+sed -n -e '$!p' employee.txt
+
+echo display occurrence of word Vinod
+sed -n -e '/Vinod/p' employee.txt
+
+echo display records for Pandita
+sed -n -e '/Pandita/p' employee.txt
+
+echo substitute Bhoomi with Neha
+sed 's/Bhoomi/Neha/' employee.txt
+
+echo substitute tab with spaces
+sed 's/\t/ /g' employee.txt
+
+echo Delete second row from file
+sed '2d' employee.txt
+
+echo Delete second to sixth row from file
+sed '2,6d' employee.txt
