@@ -17,3 +17,31 @@ awk '{for(i=1;i<=p;i++) printf $i" "; print ""}'
 
 Display even columns:
 awk '{ for (i=1;i<=NF;i+=2) print $i }' name.txt
+
+
+echo "1.Display data file"
+awk '{print}' employee.txt
+
+echo "2.Display only Roll No and First name of all students"
+awk '{print $2 "\t" $6}' employee.txt
+
+echo "3.Display details of students who's name starts with a "
+awk '$2 ~ "a"' employee.txt
+
+echo "4.Display details of students with 92 marks"
+awk '$6 ~ "92"' employee.txt
+
+echo "5.Display details of student with marks greater than 85 and less than 95"
+awk '$6>85 && $6<95' employee.txt
+
+echo "6.Display details of student with marks greater than 85 or less than 95"
+awk '$6>85 || $6<95' employee.txt
+
+echo "7.Display only even columns"
+awk '{print $2 "\t" $4 "\t" $6}' employee.txt
+
+echo "8.Display details of student with marks till Roll No: 5"
+awk '$1<=5 {print $6}' employee.txt
+
+echo "9.Display the column last name containing 'Pandita'."
+awk '$4 ~ /Pandita/ {print $4}' employee.txt
