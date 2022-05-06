@@ -1,0 +1,205 @@
+Simple interest:
+#!/bin/perl
+print "Enter Principal amount(rs):\n";
+$p=<>;
+print "Enter Number of years:\n";
+$n=<>;
+print "Enter Rate of interest:\n";
+$r=<>;
+$si=(($p*$n*$r)/100);
+print "Simple Interest is:$si(rs)\n";
+$t=($p+$si);
+print "Total amount is:$t(rs)\n";
+
+
+Compound Interest:
+#!/bin/perl
+print "Enter Principal amount(rs):\n";
+$p=<>;
+print "Enter Rate of interest:\n";
+$r=<>;
+print "Enter Compound:\n";
+$n=<>;
+print "Enter time elapsed in years:\n";
+$t=<>;
+$a=($p*(1+$r/$n)**($n*$t));
+print "Compound Interest is:$a(rs)";
+
+
+Equation:
+#!/bin/perl
+print "Enter the value of x:";
+$x=<>;
+$y=(($x**3)+(3*($x**2))-(5*$x)+8);
+print "y=$y\n";
+
+
+Factors:
+#!/bin/perl
+print "Enter a number:";
+$x=<>;
+print "Factors of $x";
+for (my $i = 1; $i <= $x; $i++ ) {
+    if ( $x % $i == 0 ) {
+        print "$i\n";
+    }
+}
+
+
+Multiples:
+#!/bin/perl
+print "Enter a number:";
+$x=<>;
+print "Enter how many multiples you want:";
+$y=<>;
+for (my $i = 1; $i <= $x; $i++ ) {
+    $m=$x*$i;
+    print "$m\n";
+}
+
+
+Fibonacci:
+#!/bin/perl
+print "Enter how many terms do you want:";
+$n=<>;
+$t1=0;
+$t2=1;
+print "$t1 \n$t2\n";
+for (my $i = 3; $i <= $n; $i++ ) {
+    $sum=$t1+$t2;
+    $t1=$t2;
+    $t2=$sum;
+    print "$sum\n";
+}
+
+
+Factorial:
+#!/bin/perl
+print "Enter a number:";
+$n=<>;
+$fact=1;
+for (my $i = 1; $i <= $n; $i++ ) {
+   $fact=$fact*$i;
+}
+print "Factorial of $n$fact";
+
+
+Total and percentage:
+#!/bin/perl
+print "Enter marks of 6 subjects:";
+for (my $i = 0; $i <= 5; $i++ ) {
+    $a=<>;
+    $t=$t+$a;
+}
+print "Total marks are $t\n";
+p=$t/3;
+print "Total percent are $p\%\n"
+
+
+Array:
+#!/bin/perl
+@arr=("hello","Hi","Bye","Bye!");
+print "In given order:\n";
+for (my $i = 0; $i <= 3; $i++ ) {
+    print "@arr[$i]\n";
+}
+print "In reverse order:\n";
+for (my $i = 3; $i >= 0; $i-- ) {
+    print "@arr[$i]\n";
+}
+
+
+Day of week:
+#!/bin/perl
+@dow=("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+print "Enter day number:";
+$d=<>;
+if ( $d > 8 ) {
+    print "Invalid input";
+}
+else {
+    print "$dow[$d-1]\n";
+}
+
+
+Power and multiplication table:
+#!/bin/perl
+print "Enter a number:";
+$n=<>;
+chomp $n;
+print "Multiplication table:\n";
+for (my $i = 1; $i <= 10; $i++ ) {
+    $x=$n*$i;
+    print "$n\*$i=$x\n";
+}
+print "Power table:\n";
+for (my $i = 1; $i <= 10; $i++ ) {
+    $x=$n**$i;
+    print "$n\^$i=$x\n";
+}
+
+
+Even odd till 100:
+#!/bin/perl
+print "Even numbers from 1 to 100:";
+for (my $i = 0; $i <= 100; $i=$i+2 ) {
+    print "$i\n";
+}
+print "Odd numbers from 1 to 100:";
+for (my $i = 1; $i <= 100; $i=$i+2 ) {
+    print "$i\n";
+}
+
+
+Prime less than 100:
+#!/bin/perl
+print "Prime numbers from 1 to 100 are:\n"
+print "2\n"
+for(my $i = 3; $i <= 100; $i++ ) 
+{ 
+    $is_prime = 1;
+    for( $j = 2; $j <= sqrt($i); $j++ ){
+        if($i % $j == 0){
+            $is_prime = 0;
+            break;
+        }
+    }
+    if($is_prime == 1) {
+        print $i."\n";
+    }
+}
+
+
+Simple calculator:
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+print "Type in 2 numbers and an operator and I'll print the results\n\n";
+ 
+print "First number: ";
+my $first = <STDIN>;
+chomp($first);
+ 
+print "Second number: ";
+my $other = <STDIN>;
+chomp($other);
+ 
+print "The operator: ";
+my $oper = <STDIN>;
+chomp($oper);
+ 
+my $result;
+if ($oper eq "+") { $result = $first + $other; }
+if ($oper eq "-") { $result = $first - $other; }
+if ($oper eq "*") { $result = $first * $other; }
+if ($oper eq "/") {
+    if ($other == 0) {
+        print "\nCannot divide by 0\n";
+        $result = "ERROR";
+    } else {
+        $result = $first / $other;
+    }
+}
+ 
+print "\nResult of $first $oper $other = $result\n";
