@@ -13,3 +13,5 @@ start:
  JNZ LOOP1
  int 03h
  end start
+
+ result can be seen in dump at ds 2003 and ds 4000
