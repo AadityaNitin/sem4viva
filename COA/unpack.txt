@@ -1,4 +1,4 @@
- Convert two digit Unpacked BCD to Packed BCD.
+ Convert two digit packed BCD to unpacked BCD.
 .model small
 .data
 a db 92H    
