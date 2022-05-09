@@ -1,0 +1,44 @@
+Some basic networking commands:
+1)ifconfig: ifconfig stands for "interface configuration." It is used to view and change the configuration of the network interfaces on your system, also used for used for displaying current network configuration information, setting up an ip address, netmask, or broadcast address to a network interface, creating an alias for the network interface, setting up hardware address, and enable or disable network interfaces.
+a)ifconfig: ifconfig command with no arguments will display all the active interfaces details. The ifconfig command is also used to check the assigned IP address of a server.
+b)ifconfig -a : will display information of all active or inactive network interfaces on the server. It displays the results for eth0, lo, sit0 and tun0.
+c)ifconfig -s: display short list (like netstat -i)
+d)ifconfig -v: be more verbose for some error conditions
+
+2)ping: PING (Packet Internet Groper) command is used to check the network connectivity between host and server/host. This command takes as input the IP address or the URL and sends a data packet to the specified address with the message “PING” and get a response from the server/host this time is recorded which is called latency.
+a) ping <site address> 
+b)ping -b: Allows pinging a broadcasting address
+c)ping -a: gives an audible ping
+d)ping -D: gives timestamp before each ping
+e)ping -c <no of packets>: define no of packets to be set
+
+3)traceroute : traceroute command in Linux prints the route that a packet takes to reach the host. This command is useful when you want to know about the route and about all the hops that a packet takes.
+a) traceroute <site address>
+b) traceroute -d : enables socket level debugging
+c) traceroute -m <max-ttl> : max-ttl is numerical input specifying max no of hops,default is 30
+d) traceroute -w <max> : determines how long to wait for response to a probe
+e) traceroute -q <nquerries> : sets no of probe packets per hops
+
+4)nslookup : Nslookup (stands for “Name Server Lookup”) is a useful command for getting information from the DNS server. It is a network administration tool for querying the Domain Name System (DNS) to obtain domain name or IP address mapping or any other specific DNS record. It is also used to troubleshoot DNS-related problems. 
+a) nslookup <sitename>: nslookup followed by the domain name will display the “A Record” (IP Address) of the domain. Use this command to find the address record for a domain. It queries to domain name servers and gets the details. 
+b)nslookup -type=any <sitename> : Lookup for any record 
+We can also view all the available DNS records using the -type=any option. 
+c)nslookup -type=soa <sitename> : Lookup for an soa record 
+SOA record (start of authority), provides the authoritative information about the domain, the e-mail address of the domain admin, the domain serial number, etc… 
+d) nslookup retry=number : sets number of retries
+
+
+5)Netstat : Netstat command displays various network related information such as network connections, routing tables, interface statistics, masquerade connections, multicast memberships etc.,
+a) netstat
+b) netstat -n : shows numerical address instead of trying to determine port/user Name
+c) netstat -c : print routing info from routecache
+d) netstat -f : print routing info from FIB
+e) netstat -l : Shows only listening sockets
+f) netstat -a : shows both listening and non listening sockets
+
+6)ARP: arp command manipulates the System’s ARP cache. It also allows a complete dump of the ARP cache. ARP stands for Address Resolution Protocol. The primary function of this protocol is to resolve the IP address of a system to its mac address, and hence it works between level 2(Data link layer) and level 3(Network layer)
+syntax: arp [-v] [-i if] [-H type] -a [hostname]
+b) arp -v, –verbose: This option shows the verbose information.
+c) arp -n, –numeric: This option shows numerical addresses instead of symbolic host, port or usernames. 
+d) arp -f filename: Works same as -s but instead of giving the entries manually, it takes entry from the file given as parameter
+e) 
