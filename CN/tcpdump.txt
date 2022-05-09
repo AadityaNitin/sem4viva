@@ -1,0 +1,4 @@
+tcpdump -n
+tcpdump -n tcp
+tcpdump -v
+tcpdump port 80 -w <filename>
