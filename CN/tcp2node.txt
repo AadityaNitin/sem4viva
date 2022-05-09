@@ -1,0 +1,59 @@
+#Create a simulator object
+set ns [new Simulator]
+$ns color 1 Red
+
+#Open the NAM trace file
+set nf [open out.nam w]
+$ns namtrace-all $nf
+
+set np [open out.tr w]
+$ns trace-all $np
+
+#Define a 'finish' procedure
+proc finish {} {
+        global ns nf np
+        $ns flush-trace
+        #Close the NAM trace file
+        close $nf
+        #Execute NAM on the trace file        
+	exec nam out.nam &
+        exit 0
+}
+
+#Create two nodes
+set n0 [$ns node]
+set n1 [$ns node]
+
+#Create links between the nodes
+$ns duplex-link $n0 $n1 2Mb 10ms DropTail
+
+#Set Queue Size of link (n2-n3) to 10
+$ns queue-limit $n0 $n1 5
+
+#Monitor the queue for link (n2-n3). (for NAM)
+$ns duplex-link-op $n0 $n1 queuePos 0.5
+
+#Setup a TCP connection
+set tcp [new Agent/TCP]
+
+$ns attach-agent $n0 $tcp
+set sink [new Agent/TCPSink]
+$ns attach-agent $n1 $sink
+$ns connect $tcp $sink
+$tcp set fid_ 1
+
+#Setup a FTP over TCP connection
+set ftp [new Application/FTP]
+$ftp attach-agent $tcp
+
+
+#Schedule events for the CBR and FTP agents
+$ns at 0.1 "$ftp start"
+$ns at 4.0 "$ftp stop"
+
+
+#Call the finish procedure after 5 seconds of simulation time
+$ns at 5.0 "finish"
+
+#Run the simulation
+$ns run
