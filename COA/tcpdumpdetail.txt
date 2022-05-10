@@ -1,0 +1,68 @@
+Aim: Study of Packet Sniffer tool TCPDUMP. Use it to capture and analyze the
+packet.
+Lab Outcome Attained: LO5
+Theory:
+Tcpdump is a command line utility that allows you to capture and analyze network
+traffic going through your system. It is often used to help troubleshoot network
+issues, as well as a security tool.
+Below are a few options you can use when configuring Tcpdump.
+Options
+• -i any : Listen on all interfaces just to see if you’re seeing any traffic.
+• -i eth0 : Listen on the eth0 interface.
+• -D : Show the list of available interfaces
+• -n : Don’t resolve hostnames.
+• -nn : Don’t resolve hostnames or port names.
+• -q : Be less verbose (more quiet) with your output.
+• -t : Give human-readable timestamp output.
+• -tttt : Give maximally human-readable timestamp output.
+• -X : Show the packet’s contents in both hex and ASCII.
+• -XX : Same as -X, but also shows the ethernet header.
+• -v, -vv, -vvv : Increase the amount of packet information you get back.
+• -c : Only get x number of packets and then stop.
+• -s : Define the snaplength (size) of the capture in bytes. Use -s0 to get
+everything, unless you are intentionally capturing less.
+• -S : Print absolute sequence numbers.
+• -e : Get the ethernet header as well.
+1. To install tcpdump
+$ sudo apt-get install tcpdump
+2. Choosing an interface:
+By default, tcpdump captures packets on all interfaces. To view a summary of
+available interfaces, run the command:
+# tcpdump -D
+3. Basic command for sniffing
+# tcpdump -n
+The -n parameter is given to stop tcpdump from resolving ip addresses to hostnames.
+Now lets increase the display resolution of this packet, or get more details about it.
+The verbose switch comes in handy. Here is a quick example
+4. tcpdump -v -n
+5. Getting the ethernet header (link layer headers)
+In the above examples details of the ethernet header are not printed. Use the -e option
+to print the ethernet header details as well.
+Filtering packets using expressions
+6. selecting packets with specific protocol
+# tcpdump -n tcp
+#tcpdump -n icmp
+7. Capturing traffic from particular host or port
+Expressions can be used to specify source ip, destination ip, and port numbers. The
+next example picks up all those packets with source address 172.16.92.1
+# tcpdump -n src 172.16.92.1
+# tcpdump -n dst 172.16.92.1
+# tcpdump -n port 80
+# tcpdump port 80
+Specific Packets from specific port
+# tcpdump udp and src port 53
+observing packets within a specific port range
+# tcpdump -n portrange 1-80
+It shows all packets whose source or destination port is between 1 to 80
+tcpdump -n src port 443
+Writing Captures to a File
+It’s often useful to save packet captures into a file for analysis in the future. These
+files are known as PCAP (PEE-cap) files, and they can be processed by hundreds of
+different applications, including network analyzers, intrusion detection systems, and
+of course by tcpdump itself. Here we’re writing to a file called capture_file using the
+-w switch.
+# tcpdump port 80 -w capture_file
+Reading PCAP files
+You can read PCAP files by using the -r switch. Note that you can use all the regular
+commands within tcpdump while reading in a file; you’re only limited by the fact that
+you can’t capture and process what doesn’t exist in the file already
