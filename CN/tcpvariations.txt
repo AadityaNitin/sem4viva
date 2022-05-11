@@ -1,0 +1,313 @@
+1)Palindrome:
+Client:
+import java.io.*;
+import java.net.*;
+
+class tcpClientpalindrome{
+public static void main(String argv[]) throws Exception{
+String sentence;
+String modifiedSentence;
+Socket clientSocket = new Socket("localhost",6789);
+BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+sentence = inFromUser.readLine();
+outToServer.writeBytes(sentence+"\n");
+modifiedSentence=inFromServer.readLine();
+System.out.println("From Server:"+modifiedSentence);
+clientSocket.close();
+}
+}
+
+Server:
+import java.io.*;
+import java.net.*;
+
+class tcpServerpalindrome
+{
+
+  public static void main(String argv[]) throws Exception
+   {
+   String clientSentence;
+   String capitalizedSentence;
+   String Reverse;
+   ServerSocket s = new ServerSocket(6789);
+   
+   while(true)
+   {
+    Reverse="";
+   Socket connectionSocket = s.accept();
+   BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+   DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+   clientSentence = inFromClient.readLine();
+   System.out.println("Received:"+clientSentence);
+   for(int i=clientSentence.length()-1;i>=0;i--)
+	{
+	Reverse=Reverse + clientSentence.charAt(i);
+	}
+	System.out.println("Reverse value:"+Reverse);
+	if(clientSentence.equals(Reverse)){
+	capitalizedSentence="String is palindrome\n";
+	}
+	else{
+	capitalizedSentence="String is not palindrome\n";
+	}
+   //capitalizedSentence=clientSentence.toUpperCase() + "\n";
+   outToClient.writeBytes(capitalizedSentence);	
+   }
+   }  
+} 
+
+
+2)Prime:
+Client:
+import java.io.*;
+import java.net.*;
+
+class TCPrime{
+public static void main(String argv[]) throws Exception{
+String sentence;
+String modifiedSentence;
+Socket clientSocket = new Socket("localhost",6789);
+BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+sentence = inFromUser.readLine();
+outToServer.writeBytes(sentence+"\n");
+modifiedSentence=inFromServer.readLine();
+System.out.println("From Server:"+modifiedSentence);
+clientSocket.close();
+}
+}
+
+Server:
+import java.io.*;
+import java.net.*;
+
+class TSPrime
+{
+   public static void main(String argv[]) throws Exception
+      {
+         String clientSentence;
+         
+         String state="working";
+         ServerSocket welcomeSocket = new ServerSocket(6789);
+         int No1;
+         boolean flag = false;
+
+         while(true)
+         {
+            Socket connectionSocket = welcomeSocket.accept();
+            BufferedReader inFromClient =
+               new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+            DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+            clientSentence = inFromClient.readLine();
+            No1 = Integer.parseInt(clientSentence);
+          
+
+               for (int i = 2; i <= No1/2; ++i) {
+
+                  if (No1 % i == 0) {
+                     
+                     flag =  true;
+                     break;
+                  } 
+               }
+               
+               if(!flag){
+                state = "Prime" + '\n';
+               }else{
+                 state = "Not Prime" + '\n';
+               }
+            
+
+
+            System.out.println("Received: " + clientSentence);
+        
+            outToClient.writeBytes(state);
+         }
+      }
+}
+
+
+
+3)Addition:
+Client:
+import java.io.*;
+import java.net.*;
+
+class tcpcliadd {
+	public static void main(String args[]) throws Exception{
+		String a, b;
+		String modify;
+		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+		Socket client = new Socket("localhost", 6789);
+		DataOutputStream outToServer = new DataOutputStream(client.getOutputStream());
+		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(client.getInputStream()));
+		System.out.println("Enter a : ");
+		a = inFromUser.readLine();
+		System.out.println("Enter b : ");
+		b = inFromUser.readLine();
+		outToServer.writeBytes(a +" "+ b+ " \n");
+		modify = inFromServer.readLine();
+		System.out.println("FROM SERVER : " + modify);
+		client.close();
+	}
+}
+
+Server:
+import java.io.*;
+import java.net.*;
+class tcpseradd {
+	public static void main(String args[]) throws Exception{
+		String in;
+		//int a, b;
+		String out;
+		ServerSocket welcome = new ServerSocket(6789);
+		while(true){
+			Socket connect = welcome.accept();
+			BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connect.getInputStream()));
+			DataOutputStream outToClient = new DataOutputStream(connect.getOutputStream());
+			in = inFromClient.readLine();
+			int space1 = in.indexOf(" ");
+			int space2 = in.indexOf(" ", space1+1);
+			int a = Integer.parseInt(in.substring(0,space1));
+			int b = Integer.parseInt(in.substring(space1+1, space2));
+			System.out.println("RECEIVED: "+ a+ " and " +b);
+			int add = a+b;
+			out = "Addition of "+a+" and " +b+ " is "+add+ '\n';
+			outToClient.writeBytes(out);
+		}
+	}
+}
+
+
+4)Largest in Array:
+Client:
+import java.io.*;
+import java.net.*;
+
+class tcpcliarr
+{
+ public static void main(String argv[]) throws Exception
+ {
+  String sentence;
+  String modifiedSentence;
+String str = "";
+  BufferedReader inFromUser = new BufferedReader( new InputStreamReader(System.in));
+  Socket clientSocket = new Socket("localhost", 6789);
+  DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+  BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+  System.out.println("Enter elements of array : " ) ;
+for(int i =0; i<4; i++) {
+        sentence = inFromUser.readLine() ;
+        str = str + sentence + " ";
+}
+
+  outToServer.writeBytes(str + '\n');
+  modifiedSentence = inFromServer.readLine();
+  System.out.println("FROM SERVER: " + modifiedSentence);
+  clientSocket.close();
+ }
+}
+
+Server:
+import java.io.*;
+import java.net.*;
+
+class tcpserarr
+{
+   public static void main(String argv[]) throws Exception
+      {
+         String in, out;
+         String capitalizedSentence;
+         ServerSocket welcomeSocket = new ServerSocket(6789);
+
+         while(true)
+         {
+            Socket connectionSocket = welcomeSocket.accept();
+            BufferedReader inFromClient =
+               new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+            DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+            in = inFromClient.readLine();
+            int s1 = in.indexOf(" ") ;
+            int s2 = in.indexOf(" ", s1+1) ;
+            int s3 = in.indexOf(" ", s2+1) ;
+            int s4 = in.indexOf(" ", s3+1) ;
+            int a = Integer.parseInt(in.substring(0, s1)) ;
+            int b = Integer.parseInt(in.substring(s1+1, s2)) ;
+            int c = Integer.parseInt(in.substring(s2+1, s3));
+            int d = Integer.parseInt(in.substring(s3+1, s4));
+            int max, max1, max2;
+            if(a>b) 
+                    max1= a;
+            else
+                    max1 = b;
+           if(c>d) 
+                    max2= c;
+            else
+                    max2 = d;
+           if(max1>max2) 
+                    max= max1;
+            else
+                    max = max2;
+            System.out.println("Received: " + in);
+             out = "Maximum element in a given array is : "+max+'\n';
+            outToClient.writeBytes(out);
+         }
+      }
+}
+
+
+5)Factorial:
+Client:
+import java.io.*;
+import java.net.*;
+
+class tcpclifac{
+	public static void main(String args[]) throws Exception{
+		String sentence, modify;
+		System.out.print("Enter a Number : ");
+		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+		Socket client = new Socket("localhost", 6789);
+		DataOutputStream outToServer = new DataOutputStream(client.getOutputStream());
+		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(client.getInputStream()));
+		sentence = inFromUser.readLine();
+		int num = Integer.parseInt(sentence);
+		String x = "" +num + '\n';
+		outToServer.writeBytes(x);
+		modify = inFromServer.readLine();
+		System.out.println("From Server : " + modify);
+		client.close();
+	}
+	
+}
+		
+Server:
+import java.io.*;
+import java.net.*;
+
+class tcpserfac{
+	public static void main(String args[]) throws Exception{
+		String clientsent, capitalsent;
+		ServerSocket welcome = new ServerSocket(6789);
+		while(true){
+			Socket connection = welcome.accept();
+			BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			DataOutputStream outToClient = new DataOutputStream(connection.getOutputStream());
+			clientsent = inFromClient.readLine();
+			int num = Integer.parseInt(clientsent);
+			System.out.println("Received number : " + num);
+			String fin = "Factorial of " +num+ " is : " + factorial(num); 
+			//capitalsent = clientsent.toUpperCase() + '\n';
+			outToClient.writeBytes(fin + '\n');
+		}
+	}
+	public static int factorial(int num){
+		int fact = 1;
+		for (int i = 1; i<=num; i++){
+			fact = fact*i;
+		}
+		return fact;
+	}
+}
