@@ -1,0 +1,181 @@
+1)Factorial:
+Client:
+import java.net.*;
+import java.io.*;
+
+class udpclifac
+{
+	public static void main (String args[]) throws Exception{
+		BufferedReader inFromUser = new BufferedReader (new InputStreamReader (System.in));
+		DatagramSocket client = new DatagramSocket ();
+		InetAddress ip = InetAddress.getByName("localhost");
+		byte[] send = new byte[1024];
+		byte[] receive = new byte[1024];
+		String sent = inFromUser.readLine();
+		send = sent.getBytes();
+		DatagramPacket sendpack = new DatagramPacket (send, send.length, ip, 9876);
+		client.send(sendpack);
+		DatagramPacket receivepack = new DatagramPacket(receive, receive.length);
+		client.receive(receivepack);
+		String op = new String(receivepack.getData());
+		System.out.println("FROM SERVER : " + op);
+		client.close();
+	}
+}
+
+Server:
+import java.net.*;
+import java.io.*;
+
+class udpserfac{
+	public static void main (String args[]) throws Exception{
+		DatagramSocket server = new DatagramSocket(9876);
+		byte[] send = new byte[1024];
+		byte[] receive = new byte[1024];
+		while (true){
+			DatagramPacket receivepack = new DatagramPacket(receive, receive.length);
+			server.receive(receivepack);
+			String inp = new String(receivepack.getData());
+			System.out.println("RECEIVED : " + inp);
+			InetAddress ip = receivepack.getAddress();
+			int port = receivepack.getPort();
+			//String modify = inp.toUpperCase();
+			inp = inp.trim();
+			int a = Integer.parseInt(inp);
+			int factos = factorial(a);
+			//Integer b = new Integer(factos);
+			//send = b.byteValue();
+			//String str = String.valueOf(factos);
+			String str = "The factorial of " +a+ " is : " +factos; 
+			send = str.getBytes();
+			DatagramPacket sendpack = new DatagramPacket (send, send.length, ip, port);
+			server.send(sendpack);
+		}
+	}
+	public static int factorial(int num){
+		int fac = 1;
+		for (int i = 1; i<=num; i++){
+			fac = fac*i;
+		}
+		return fac;
+	}
+}
+
+
+2)Palindrome::
+Client:
+import java.net.*;
+import java.io.*;
+
+class udpclipal{
+	public static void main(String args[]) throws Exception{
+		BufferedReader inFromUser = new BufferedReader (new InputStreamReader (System.in));
+		DatagramSocket client = new DatagramSocket();
+		InetAddress ip = InetAddress.getByName("localhost");
+		byte[] send = new byte[1024];
+		byte[] receive = new byte[1024];
+		String inp = inFromUser.readLine();
+		send = inp.getBytes();
+		DatagramPacket sendpack = new DatagramPacket (send, send.length, ip, 9876);
+		client.send(sendpack);
+		DatagramPacket receivepack = new DatagramPacket(receive, receive.length);
+		client.receive(receivepack);
+		String op = new String (receivepack.getData());
+		System.out.println("FROM SERVER: " + op);
+		client.close();		
+	}
+}
+
+Server:
+import java.net.*;
+import java.io.*;
+
+class udpserpal{
+	public static void main(String args[]) throws Exception{
+		DatagramSocket server = new DatagramSocket(9876);
+		byte[] send = new byte[1024];
+		byte[] receive = new byte[1024];
+		while(true){
+			DatagramPacket receivepack = new DatagramPacket(receive, receive.length);
+			server.receive(receivepack);
+			String in = new String(receivepack.getData());
+			System.out.println("RECEIVED : " +in);
+			InetAddress ip = receivepack.getAddress();
+			int port = receivepack.getPort();
+			in = in.trim();
+			String str = palindrome(in);
+			send = str.getBytes();
+			DatagramPacket sendpack = new DatagramPacket(send, send.length, ip, port);
+			server.send(sendpack);
+		}
+	}
+	public static String palindrome (String str){
+		String rev = "";
+		String op;
+		for(int i = str.length()-1; i>=0; i--){
+			//char a = str.charAt(i);
+			rev = rev+str.charAt(i);
+		}
+		if(str.equalsIgnoreCase(rev))
+			op = "String is Palindrome";
+		else
+			op = "String is not Palindrome";
+		return op;
+	}
+}
+
+
+3)Capitalization:
+Client:
+import java.io.*;
+import java.net.*;
+
+class udpclicap
+{
+   public static void main(String args[]) throws Exception
+   {
+      BufferedReader inFromUser =
+         new BufferedReader(new InputStreamReader(System.in));
+      DatagramSocket clientSocket = new DatagramSocket();
+      InetAddress IPAddress = InetAddress.getByName("localhost");
+      byte[] sendData = new byte[1024];
+      byte[] receiveData = new byte[1024];
+      String sentence = inFromUser.readLine();
+      sendData = sentence.getBytes();
+      DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
+      clientSocket.send(sendPacket);
+      DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+      clientSocket.receive(receivePacket);
+      String modifiedSentence = new String(receivePacket.getData());
+      System.out.println("FROM SERVER:" + modifiedSentence);
+      clientSocket.close();
+   }
+}
+
+Server:
+import java.io.*;
+import java.net.*;
+
+class udpsercap
+{
+   public static void main(String args[]) throws Exception
+      {
+         DatagramSocket serverSocket = new DatagramSocket(9876);
+            byte[] receiveData = new byte[1024];
+            byte[] sendData = new byte[1024];
+            while(true)
+               {
+                  DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+                  serverSocket.receive(receivePacket);
+                  String sentence = new String( receivePacket.getData());
+                  System.out.println("RECEIVED: " + sentence);
+                  InetAddress IPAddress = receivePacket.getAddress();
+                  int port = receivePacket.getPort();
+                  String capitalizedSentence = sentence.toUpperCase();
+                  sendData = capitalizedSentence.getBytes();
+                  DatagramPacket sendPacket =
+                  new DatagramPacket(sendData, sendData.length, IPAddress, port);
+                  serverSocket.send(sendPacket);
+               }
+      }
+}
